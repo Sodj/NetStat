@@ -1,0 +1,19 @@
+{
+    "main": "index.html",
+    "name": "NetStat",
+    "window":
+    {
+        "toolbar": false,
+        "frame"  : true,
+        "icon"   : "img/on.png",
+        "width"  : 200,
+        "height" : 110,
+        "resizable"  : false,
+        "position"   : "center",
+        "show"       : true,
+        "show_in_taskbar" : true,
+        "fullscreen" : false,
+        "kiosk"      : false
+        
+    }
+}

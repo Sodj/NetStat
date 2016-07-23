@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+html{ boorder:solid 1px #999; background:#EEE; height: 100%; overflow: hidden; box-sizing: border-box; background: url("../img/bg.jpg"); background-position:center; background-size: 950px 650px;}
+body{margin: 0; padding: 0; position: relative; padding-bottom: 20px;}
+
+header{ width:100%; height:34px; background: -webkit-linear-gradient(top, rgba(255,255,255,.9) 0, rgba(225,225,225,.9) 100%);
+    border-bottom:1px solid rgb(205,205,205); -webkit-app-region: drag; -webkit-user-select:none; box-shadow:0 1px 3px #333; cursor: default;
+ }
+ header #name{float: left; font:16px "segoe ui"; margin:5px 10px; color: #333; text-shadow:1px 1px #fff;}
+
+header>ul{ float:right; text-align:right line-height:0; padding-left:6px; }
+header>ul>li,header>ul>li>a{ display:inline-block; }
+header>ul{ float:right; }
+header>ul>li>a{ display: none;
+	width:22px; height:22px; margin:6px 6px 3px -3px; -webkit-transition: -webkit-transform 200ms; -webkit-app-region: no-drag;
+ 	color:#333; border-radius:2px; width:20px; height:20px; line-height:20px; text-align:center; position:relative; top:0px; opacity:.7; text-shadow:0px 1px #555;
+ }
+header>ul>li>a:hover,header>ul>li>a:active{  opacity:1; }
+#windowControlReset,#windowControlDevtools{display: block; font-size:22px; }
+
+#content{padding:20px 0 10px  0; font:14px "segoe ui"; max-height: 585px; overflow:hidden;  overflow-y:auto;}
+#content::-webkit-scrollbar { width:10px; }
+#content::-webkit-scrollbar-track { }
+#content::-webkit-scrollbar-thumb { background:rgba(250,250,250,.5); border-radius:5px; border:solid thin rgba(250,250,250,.4); }
+#content::-webkit-scrollbar-thumb:hover { background:rgba(250,250,250,.8); border-color:solid thin rgba(250,250,250,.8); }
+#content::-webkit-scrollbar-thumb:window-inactive { background:rgba(250,250,250,.4); }
+input{border:solid thin #999; color:#444; padding:5px 2px; background:linear-gradient(rgba(238,238,238,.9),rgba(255,255,255,.9)); margin:5px -5px 5px 0; box-shadow:inset 0 0 3px #CCC; border-radius:1px;}
+input:focus{outline: none; border:solid thin #AAA; }
+#input button{padding:5px 0; width:56px; margin-left:6px;}
+#input{text-align:center;}
+
+.item{ padding: 1px 0; margin:auto; box-shadow:0 1px 3px 1px rgba(0,0,0,.3); margin-top: 4px;width:536px; border-radius:3px; }
+.rmv,.edt,.inf,#titles,#new,#find{
+	border:solid thin #CCC; color:#444; display:inline-block; width:470px; padding:3px 5px; cursor: default;
+	background-image:linear-gradient(rgba(255,255,255,.9) ,rgba(238,238,238,.9)); margin-top:0px; border-top-left-radius:3px;border-bottom-left-radius:3px; z-index:0;
+}
+.rmv,.edt,#new,#find{ text-shadow:1px 1px #fff; padding:6px 0 7px 0; vertical-align:top; width:28px; display:inline-block; text-align:center; margin-left:-4px; border-left:none; border-radius:0;}
+.rmv,#find{border-top-right-radius:3px;border-bottom-right-radius:3px;}
+.inf,#titles{padding: 0; padding-left:5px;}
+
+.rmv:hover,.edt:hover,#new:hover,#find:hover{text-shadow:1px 1px #333; color:#FFF; cursor:pointer; background-color: #FFF;}
+.rmv:hover {border-color:#D50; background-image:linear-gradient(rgba(255,50,0,.6)  ,rgba(255,50,0,.8)  );}
+.edt:hover {border-color:#079; background-image:linear-gradient(rgba(0,150,255,.6) ,rgba(0,140,245,.8) );}
+#new:hover {border-color:#393; background-image:linear-gradient(rgba(50,180,0,.5)  ,rgba(50,170,0,.9)  );}
+#find:hover{border-color:#f90; background-image:linear-gradient(rgba(250,180,50,.5),rgba(250,170,50,.9));}
+
+.inf div,#titles div{display: inline-block; overflow:hidden; overflow:hidden; heeight:19px; height: 32px; line-height: 32px; margin:0px !important; margin-bottom:-4px !important; border-right: dashed thin #DDD; padding: 0 2px; box-sizing:border-box; }
+.inf div:last-child,#titles>div:last-child{ border: none;}
+.inf div[contenteditable=true]{outline:none; color:#f96; cursor: auto;}
+.inf div:focus{ border-bottom:solid thin #f96; margin-top:-1px;}
+#titles div{ color:#333;font-weight:500;}
+#titles,#new,#find{ background:linear-gradient(rgba(240,240,240,.9) ,rgba(224,224,224,.8)); border-color:#bbb;}
+
+.account{width:90px;}
+.name   {width:110px;}
+.login  {width:165px;}
+.pwd    {width:90px;}
+
+#bg{position:fixed; width:100%; height:100%; background:rgba(0,0,0,.5); z-idex:20; text-align:center;}
+#confirme,#alerte{display:none;}
+#title{ color:#333;text-align:left; background:linear-gradient(#EEEEEE,#DFDFDF); border-bottom:solid thin #CCC; position:absolute; left:0;top:0;right:0; padding:3px 5px;}
+#confirme,#alerte,#login{ z-index:50; position:relative; margin:auto; top:200px; text-align:center; width:250px; font:14px tahoma; border:solid thin #333; box-shadow: 0 0 7px 1px #333; background: #FFF; padding: 10px; border-radius:4px; overflow: hidden;}
+#bg #text{text-align:left; margin-top:35px; margin-bottom:20px; color:#333;}
+#bg #yes,#bg #no,#bg #ok{background:linear-gradient(#F5F5F5,#E5E5E5); display:inline-block; padding:3px 15px; border:solid thin #AAA; border-radius:2px; margin:0 4px; box-shadow:0 0px 5px #CCC; text-shadow:1px 1px #fff; color:#333; cursor:pointer; -webkit-user-select:none;}
+#bg #yes:hover,#bg #no:hover,#bg #ok:hover{background:linear-gradient(#F0F0F0,#E0E0E0);}
+#bg #yes:active,#bg #no:active,#bg #ok:active{position:relative; top:1px; background:linear-gradient(#E0E0E0,#F0F0F0); box-shadow:inset 0 0px 5px #CCC;}
+
+
+
+/*NET*/
+#state{
+	color: white;
+	font:300 16px "Segoe UI";
+	vertical-align: middle
+}

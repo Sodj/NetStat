@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>NetStat</title>
+    <link rel='stylesheet' href='css/reset.css'>
+    <link rel='stylesheet' href='css/style.css'>
+    <link rel='stylesheet' href='css/switch.css'>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script>
+
+        var nw = require('nw.gui');
+        var fs = require('fs');
+        var win = nw.Window.get();
+        win.isMaximized = false;
+        var key = "";      
+    </script>
+
+    </head>
+<body>
+
+    <header>
+    	<div id="name">Internet Status:</div>
+        <ul>
+            <li><a href='#' title='Reset'    id='windowControlReset'   >&#8634;</a></li>
+            <li><a href='#' title='Devtools' id='windowControlDevtools'>≡</a></li>
+            <li><a href='#' title='Minimize' id='windowControlMinimize'>_</a></li>
+            <li><a href='#' title='Maximize' id='windowControlMaximize'>&#9715;</a></li>
+            <li><a href='#' title='Close'    id='windowControlClose'   >&#10005;</a></li>
+        </ul>
+    </header>
+
+    <div id="content" align="center" ng-app="myapp" ng-controller="MainCtrl">
+
+        <span id="state">State: {{state.text}}</span>
+        <label class="switch">
+            <input type="checkbox" ng-click="switch()" ng-checked="onn" checked>
+            <div class="slider round"></div>
+        </label>
+
+    </div>
+
+    <script>    
+        // Reset
+        document.getElementById('windowControlReset'   ).onclick = function() { win.reload(); };
+        // Devtools
+        document.getElementById('windowControlDevtools').onclick = function() { win.showDevTools(); };
+        // Min
+        document.getElementById('windowControlMinimize').onclick = function() { win.minimize(); };
+        // Close
+        document.getElementById('windowControlClose'   ).onclick = function() { win.close(); };
+        // Max
+        document.getElementById('windowControlMaximize').onclick = function() { if (win.isMaximized) win.unmaximize(); else win.maximize(); };
+        win.on(  'maximize', function(){ win.isMaximized = true;  });
+        win.on('unmaximize', function(){ win.isMaximized = false; });
+
+
+
+        // Angular
+        var app = angular.module('myapp', []);
+        app.controller('MainCtrl', ['$http', '$scope', '$window', function( $http, $scope, $window) {
+
+            $scope.state = {val: false, text: "Disconnected"};
+            $scope.onn = true;
+
+            var tray;
+
+            tray = new nw.Tray({ icon: $scope.state.val? "img/on.png" : "img/off.png" });// Show tray
+            var menu = new nw.Menu();
+            var swich = new nw.MenuItem({ type: 'checkbox', label: 'On/Off' });
+            var quit = new nw.MenuItem({ label: 'Quit' });
+            swich.click= function() { $scope.switch(); };
+            quit.click= function() { win.close(); };
+            menu.append(swich);
+            menu.append(quit);
+            tray.menu = menu;
+
+            // Show window and remove tray when clicked
+            tray.on('click', function() {
+                win.show();
+                //this.remove();
+                //tray = null;
+            });
+            win.on('minimize', function() {
+                
+                this.hide(); // Hide window
+            });
+
+            check();
+            var interval = setInterval(function() {check();}, 60000);
+
+            $scope.switch = function () {
+                if($scope.onn)  clearInterval(interval);
+                else interval = setInterval(function() {check();}, 60000);
+                $scope.onn = !$scope.onn;
+            };
+
+            function check() {
+            
+            	$http.get("https://www.google.com/textinputassistant/tia.png").then( //http://www.checkip.org/ ------ http://www.msftncsi.com/ncsi.txt
+            		function (success) {
+                        console.log("success");
+                        if($scope.state.val) return;
+
+                        if(tray) tray.icon = "img/on.png";
+                        $scope.state.val = true;
+                        $scope.state.text = "Connected";
+
+            			/* NOTIFICATION */
+            			var options = {icon: "img/icon3.png",body: "Internet is Back"};
+    					var notification = new Notification("CONNECTED",options);
+    					notification.onclick = function () {  console.log("Notification clicked");  }
+    					notification.onshow  = function () {
+    						var audio = new Audio('on1.wav');
+    						audio.play();
+    						// auto close after 1 second
+    						setTimeout(function() { notification.close(); }, 3000);
+    					}
+
+            		},
+            		function (error)   {
+                        console.log("error",error);
+                        if(!$scope.state.val) return;
+
+                        if(tray) tray.icon = "img/off.png";
+                        $scope.state.val = false;
+                        $scope.state.text = "Diconnected";
+
+                        var audio = new Audio('off.wav');
+                        audio.play();
+                    }
+            	);
+
+            }
+
+            
+        }]);
+
+    </script>
+
+</body>
+</html>
