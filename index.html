@@ -9,7 +9,12 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/angular.js"></script>
     <script>
-
+        var os = require("os");
+        var OS = {
+            win: os.platform()=="windows",
+            mac: os.platform()=="darwin",
+            lin: os.platform()=="linux"
+        };
         var nw = require('nw.gui');
         var fs = require('fs');
         var win = nw.Window.get();
@@ -65,8 +70,8 @@
             $scope.onn = true;
 
             var tray;
-
-            tray = new nw.Tray({ icon: $scope.state.val? "img/on.png" : "img/off.png" });// Show tray
+            tray = new nw.Tray({ /*title:"OK",tooltip:"FINE",*/ icon: $scope.state.val? "img/on.png" : "img/off.png" });// Show tray
+            
             var menu = new nw.Menu();
             var swich = new nw.MenuItem({ type: 'checkbox', label: 'On/Off' });
             var quit = new nw.MenuItem({ label: 'Quit' });
@@ -88,17 +93,17 @@
             });
 
             check();
-            var interval = setInterval(function() {check();}, 60000);
+            var interval = setInterval(function() {check();}, 10000);
 
             $scope.switch = function () {
                 if($scope.onn)  clearInterval(interval);
-                else interval = setInterval(function() {check();}, 60000);
+                else interval = setInterval(function() {check();}, 10000);
                 $scope.onn = !$scope.onn;
             };
 
             function check() {
             
-            	$http.get("https://www.google.com/textinputassistant/tia.png").then( //http://www.checkip.org/ ------ http://www.msftncsi.com/ncsi.txt
+            	$http.get("https://echo.getpostman.com/headers").then( //http://www.checkip.org/ ------ http://www.msftncsi.com/ncsi.txt ----- https://www.google.com/textinputassistant/tia.png
             		function (success) {
                         console.log("success");
                         if($scope.state.val) return;

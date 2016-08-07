@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
 html{ boorder:solid 1px #999; background:#EEE; height: 100%; overflow: hidden; box-sizing: border-box; background: url("../img/bg.jpg"); background-position:center; background-size: 950px 650px;}
-body{margin: 0; padding: 0; position: relative; padding-bottom: 20px;}
+body{margin: 0; padding: 0; position: relative; padding-bottom: 20px; font-family:"sugoi","tahoma";}
 
 header{ width:100%; height:34px; background: -webkit-linear-gradient(top, rgba(255,255,255,.9) 0, rgba(225,225,225,.9) 100%);
     border-bottom:1px solid rgb(205,205,205); -webkit-app-region: drag; -webkit-user-select:none; box-shadow:0 1px 3px #333; cursor: default;
  }
- header #name{float: left; font:16px "segoe ui"; margin:5px 10px; color: #333; text-shadow:1px 1px #fff;}
+ header #name{float: left; font:16px "sugoi","tahoma"; margin:5px 10px; color: #333; text-shadow:1px 1px #fff;}
 
 header>ul{ float:right; text-align:right line-height:0; padding-left:6px; }
 header>ul>li,header>ul>li>a{ display:inline-block; }
@@ -18,7 +18,7 @@ header>ul>li>a{ display: none;
 header>ul>li>a:hover,header>ul>li>a:active{  opacity:1; }
 #windowControlReset,#windowControlDevtools{display: block; font-size:22px; }
 
-#content{padding:20px 0 10px  0; font:14px "segoe ui"; max-height: 585px; overflow:hidden;  overflow-y:auto;}
+#content{padding:20px 0 10px  0; font:14px "sugoi"; max-height: 585px; overflow:hidden;  overflow-y:auto;}
 #content::-webkit-scrollbar { width:10px; }
 #content::-webkit-scrollbar-track { }
 #content::-webkit-scrollbar-thumb { background:rgba(250,250,250,.5); border-radius:5px; border:solid thin rgba(250,250,250,.4); }
@@ -69,7 +69,11 @@ input:focus{outline: none; border:solid thin #AAA; }
 
 /*NET*/
 #state{
-	color: white;
-	font:300 16px "Segoe UI";
+	color: rgba(255, 255, 255, 0.8);
+	font:300 16px "sugoi", "Tahoma";
 	vertical-align: middle
+}
+@font-face {
+  font-family: "sugoi";
+  src: url("../fonts/light.eot?") format("eot"), url("../fonts/light.ttf") format("ttf"), url("../fonts/light.woff") format("woff");
 }
